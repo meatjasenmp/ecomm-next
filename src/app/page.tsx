@@ -5,7 +5,7 @@ export default async function Page() {
   const products = await fetchData();
 
   return (
-    <div className="2xl:container lg:flex mx-auto">
+    <div className="container lg:flex">
       <Sidebar>Sidebar</Sidebar>
       <section className="w-4/5">Products Grid</section>
     </div>
