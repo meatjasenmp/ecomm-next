@@ -10,7 +10,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Jasen's Reddit Clone",
+  title: "Jasen's Ecomm App",
   description: "For kicks.",
 };
 
