@@ -10,10 +10,12 @@ export default async function ProductsGrid() {
   if (!products.length) return <NotFound />;
 
   return (
-    <Grid>
-      {products.map((product) => (
-        <ProductCard key={product._id} product={product} />
-      ))}
-    </Grid>
+    <section className="w-4/5">
+      <Grid>
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </Grid>
+    </section>
   );
 }
