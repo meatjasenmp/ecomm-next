@@ -15,6 +15,7 @@ function ProductCard({ product }: { product: ProductInterface }) {
 
 export default async function ProductsGrid() {
   const products: ProductInterface[] = await fetchData();
+
   return (
     <Grid>
       {products.map((product) => (
