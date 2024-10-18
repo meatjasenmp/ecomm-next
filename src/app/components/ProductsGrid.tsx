@@ -1,11 +1,10 @@
-import fetchData from "@/app/api/requests";
+import { fetchProducts } from "@/app/api/requests";
 import Grid from "@/app/components/Grid";
 import ProductCard from "@/app/components/ProductCard";
 import NotFound from "@/app/components/NotFound";
-import { Product } from "@/app/api/types";
 
 export default async function ProductsGrid() {
-  const products: Product[] = await fetchData();
+  const products = await fetchProducts();
 
   if (!products.length) return <NotFound />;
 
