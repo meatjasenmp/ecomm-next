@@ -1,8 +1,8 @@
-import { ProductInterface } from "@/app/api/types";
+import { Product } from "@/app/api/types";
 import Card from "@/app/components/Card";
 
 interface ProductCardProps {
-  product: ProductInterface;
+  product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {

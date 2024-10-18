@@ -6,7 +6,7 @@ const ImageSchema = z.object({
   _id: z.string().optional(),
 });
 
-const ProductSchema = z.object({
+export const ProductSchema = z.object({
   _id: z.string().optional(),
   title: z.string(),
   description: z.string(),
@@ -17,4 +17,4 @@ const ProductSchema = z.object({
   isPublished: z.boolean(),
 });
 
-export type ProductSchema = z.infer<typeof ProductSchema>;
+export type Product = z.infer<typeof ProductSchema>;
