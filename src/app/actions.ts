@@ -9,7 +9,7 @@ export async function addProduct(product: FormData) {
     description: product.get("description"),
     price: product.get("price"),
     category_ids: product.getAll("categories"),
-    images: product.getAll("image"),
+    images: product.getAll("images"),
     discount: product.get("discount"),
     isPublished: product.get("isPublished"),
   });
