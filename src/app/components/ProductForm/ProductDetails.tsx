@@ -1,45 +1,43 @@
+import { parseStyles } from "@/app/helpers/styles";
+import {
+  containerStyles,
+  inputStyles,
+  labelStyles,
+} from "@/app/components/ProductForm/styles";
+
 export default function ProductDetails() {
   return (
     <>
       <div className="sm:col-span-4">
-        <label
-          htmlFor="product title"
-          className="block text-sm font-medium leading-6 text-gray-900"
-        >
+        <label htmlFor="title" className={parseStyles(labelStyles)}>
           Product Title
         </label>
         <div className="mt-2">
-          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+          <div className={parseStyles(containerStyles)}>
             <input
-              id="product_title"
-              name="product_title"
+              id="title"
+              name="title"
               type="text"
               placeholder="Air Jordan 1"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className={parseStyles(inputStyles)}
             />
           </div>
         </div>
       </div>
 
       <div className="col-span-full">
-        <label
-          htmlFor="about"
-          className="block text-sm font-medium leading-6 text-gray-900"
-        >
-          About
+        <label htmlFor="description" className={parseStyles(labelStyles)}>
+          Description
         </label>
         <div className="mt-2">
           <textarea
-            id="about"
-            name="about"
+            id="description"
+            name="description"
             rows={3}
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className={parseStyles(inputStyles)}
             defaultValue={""}
           />
         </div>
-        <p className="mt-3 text-sm leading-6 text-gray-600">
-          Write a few sentences about yourself.
-        </p>
       </div>
     </>
   );
