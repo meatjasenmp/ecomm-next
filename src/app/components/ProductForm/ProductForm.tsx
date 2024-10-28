@@ -1,5 +1,5 @@
 import Form from "next/form";
-import { addProduct } from "@/app/actions";
+import { addProduct } from "@/app/products/actions";
 import ProductFormHeader from "@/app/components/ProductForm/ProductFormHeader";
 import ProductDetails from "@/app/components/ProductForm/ProductDetails";
 import ProductImages from "@/app/components/ProductForm/ProductImages";
