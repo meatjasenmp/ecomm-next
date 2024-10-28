@@ -1,5 +1,5 @@
 "use server";
-import { createProduct } from "@/app/api/requests";
+import { createProduct } from "@/app/api/products/requests";
 import { ProductSchema, Product } from "@/app/api/types";
 
 export async function addProduct(product: FormData) {
