@@ -22,13 +22,11 @@ import {
   listBoxOptionValueStyles,
 } from "@/app/components/ProductForm/styles";
 
-interface ProductCategoriesProps {
+interface CategoriesProps {
   categories: Category[];
 }
 
-export default function ProductCategories({
-  categories,
-}: ProductCategoriesProps) {
+export default function ProductCategories({ categories }: CategoriesProps) {
   const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
 
   return (
