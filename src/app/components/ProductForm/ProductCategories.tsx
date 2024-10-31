@@ -9,9 +9,6 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Category } from "@/app/api/categories/types";
-
-import { parseStyles } from "@/app/helpers/styles";
 import {
   labelStyles,
   listBoxButtonStyles,
@@ -21,6 +18,8 @@ import {
   listBoxOptionStyles,
   listBoxOptionValueStyles,
 } from "@/app/components/ProductForm/styles";
+import { Category } from "@/app/api/categories/types";
+import { parseStyles } from "@/app/helpers/styles";
 
 interface CategoriesProps {
   categories: Category[];
