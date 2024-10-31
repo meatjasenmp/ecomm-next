@@ -1,4 +1,4 @@
-import { Product } from "@/app/api/types";
+import { Product } from "@/app/api/products/types";
 import Card from "@/app/components/Card";
 
 interface ProductCardProps {

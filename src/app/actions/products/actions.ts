@@ -1,6 +1,6 @@
 "use server";
 import { createProduct } from "@/app/api/products/requests";
-import { ProductSchema, Product } from "@/app/api/types";
+import { ProductSchema, Product } from "@/app/api/products/types";
 
 export async function addProduct(product: FormData) {
   const newProductSchema = ProductSchema.omit({ _id: true });
