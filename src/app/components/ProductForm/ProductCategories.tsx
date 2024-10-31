@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Label,
   Listbox,
@@ -6,19 +9,25 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { fetchCategories } from "@/app/api/categories/requests";
+import { Category } from "@/app/api/categories/types";
 
-export default async function ProductCategories() {
-  const categories = await fetchCategories();
+interface ProductCategoriesProps {
+  categories: Category[];
+}
+
+export default function ProductCategories({
+  categories,
+}: ProductCategoriesProps) {
+  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
 
   return (
-    <Listbox value={categories[0]}>
+    <Listbox value={selectedCategory} onChange={setSelectedCategory}>
       <Label className="block text-sm/6 font-medium text-gray-900">
         Assigned to
       </Label>
       <div className="relative mt-2">
         <ListboxButton className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm/6">
-          <span className="block truncate">{"Category"}</span>
+          <span className="block truncate">{selectedCategory}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon
               aria-hidden="true"
