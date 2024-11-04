@@ -2,7 +2,12 @@
 import { createProduct } from "@/app/api/products/requests";
 import { ProductSchema, Product } from "@/app/api/products/types";
 
-export async function addProduct(product: FormData) {
+export async function addProduct(
+  prevState: {
+    message: string;
+  },
+  product: FormData,
+) {
   const newProductSchema = ProductSchema.omit({ _id: true });
   const parse = newProductSchema.safeParse({
     title: product.get("title"),
@@ -19,7 +24,8 @@ export async function addProduct(product: FormData) {
   const data = parse.data as Product;
 
   try {
-    return await createProduct(data);
+    await createProduct(data);
+    return { message: "Product created successfully" };
   } catch (err) {
     return { message: "Failed to create Product", error: err };
   }

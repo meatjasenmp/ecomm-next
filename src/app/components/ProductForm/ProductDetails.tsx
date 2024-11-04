@@ -4,11 +4,10 @@ import ProductPrice from "@/app/components/ProductForm/ProductPrice";
 import ProductDiscount from "@/app/components/ProductForm/ProductDiscount";
 import ProductCategories from "@/app/components/ProductForm/ProductCategories";
 import ProductPublished from "@/app/components/ProductForm/ProductPublished";
-import { fetchCategories } from "@/app/api/categories/requests";
+import { CategoriesProps } from "@/app/admin/page";
 
-export default async function ProductDetails() {
-  const categories = await fetchCategories();
-
+// TODO: Loading State for Categories. Confirm this is the ideal pattern for requests.
+export default function ProductDetails({ categories }: CategoriesProps) {
   return (
     <>
       <ProductTitle />

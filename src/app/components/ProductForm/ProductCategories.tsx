@@ -18,12 +18,8 @@ import {
   listBoxOptionStyles,
   listBoxOptionValueStyles,
 } from "@/app/components/ProductForm/styles";
-import { Category } from "@/app/api/categories/types";
 import { parseStyles } from "@/app/helpers/styles";
-
-interface CategoriesProps {
-  categories: Category[];
-}
+import { CategoriesProps } from "@/app/admin/page";
 
 export default function ProductCategories({ categories }: CategoriesProps) {
   const [selectedCategory, setSelectedCategory] = useState(categories[0].name);

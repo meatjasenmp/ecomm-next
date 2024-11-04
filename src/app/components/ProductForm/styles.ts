@@ -25,7 +25,8 @@ export const leadingAddOns = {
 export const listBoxButtonStyles = {
   size: inputStyles.size,
   position: "relative",
-  appearance: inputStyles.appearance,
+  appearance:
+    "ring-gray-300 ring-1 ring-inset rounded-md shadow-sm, rounded-md border-0",
   cursor: "cursor-default",
   spacing: "py-1.5 pl-3 pr-10",
   font: `text-gray-900 sm:text-sm/6 text-left`,
