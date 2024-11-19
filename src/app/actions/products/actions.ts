@@ -10,15 +10,17 @@ export async function addProduct(
   },
   product: FormData,
 ) {
-  const newProductSchema = ProductSchema.omit({ _id: true });
+  const newProductSchema = ProductSchema.omit({
+    _id: true,
+  });
+
   const parse = newProductSchema.safeParse({
     title: product.get("title"),
     description: product.get("description"),
-    price: product.get("price"),
-    category_ids: product.getAll("categories"),
-    images: product.getAll("images"),
-    discount: product.get("discount"),
-    isPublished: product.get("isPublished"),
+    shortDescription: product.get("short-description"),
+    price: Number(product.get("price")),
+    discount: Number(product.get("discount")),
+    isPublished: true,
   });
 
   if (!parse.success) return { message: "Invalid Product Schema" };
