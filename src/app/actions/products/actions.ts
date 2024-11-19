@@ -18,6 +18,7 @@ export async function addProduct(
     title: product.get("title"),
     description: product.get("description"),
     shortDescription: product.get("short-description"),
+    categories: product.getAll("categories[_id]"),
     price: Number(product.get("price")),
     discount: Number(product.get("discount")),
     isPublished: true,

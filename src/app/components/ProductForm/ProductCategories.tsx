@@ -22,14 +22,18 @@ import { parseStyles } from "@/app/helpers/styles";
 import { CategoriesProps } from "@/app/admin/page";
 
 export default function ProductCategories({ categories }: CategoriesProps) {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   return (
-    <Listbox value={selectedCategory} onChange={setSelectedCategory}>
+    <Listbox
+      value={selectedCategory}
+      onChange={setSelectedCategory}
+      name="categories"
+    >
       <Label className={parseStyles(labelStyles)}>Assigned to</Label>
       <div className="relative mt-2">
         <ListboxButton className={parseStyles(listBoxButtonStyles)}>
-          <span className="block truncate">{selectedCategory}</span>
+          <span className="block truncate">{selectedCategory.name}</span>
           <span className={parseStyles(listBoxChevronContainer)}>
             <ChevronUpDownIcon
               aria-hidden="true"
@@ -45,7 +49,7 @@ export default function ProductCategories({ categories }: CategoriesProps) {
           {categories.map((category) => (
             <ListboxOption
               key={category._id}
-              value={category.name}
+              value={category}
               className={parseStyles(listBoxOptionStyles)}
             >
               <span className={parseStyles(listBoxOptionValueStyles)}>

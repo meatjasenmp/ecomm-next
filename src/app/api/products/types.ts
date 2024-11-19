@@ -12,7 +12,7 @@ export const ProductSchema = z.object({
   description: z.string(),
   shortDescription: z.string(),
   price: z.number(),
-  // category_ids: z.array(z.string()),
+  categories: z.string().array(),
   // images: ImageSchema.array(),
   discount: z.number().optional(),
   isPublished: z.boolean(),
