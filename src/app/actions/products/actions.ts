@@ -5,14 +5,10 @@ import { ProductSchema, Product } from "@/app/api/products/types";
 import { revalidatePath } from "next/cache";
 
 export async function addProduct(
-  prevState: {
-    message: string;
-  },
+  prevState: { message: string },
   product: FormData,
 ) {
-  const newProductSchema = ProductSchema.omit({
-    _id: true,
-  });
+  const newProductSchema = ProductSchema.omit({ _id: true });
 
   const parse = newProductSchema.safeParse({
     title: product.get("title"),
@@ -20,6 +16,7 @@ export async function addProduct(
     shortDescription: product.get("short-description"),
     categories: product.getAll("categories[_id]"),
     price: Number(product.get("price")),
+    images: product.get("product-image"),
     discount: Number(product.get("discount")),
     isPublished: true,
   });
