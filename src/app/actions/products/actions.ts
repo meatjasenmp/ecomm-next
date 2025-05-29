@@ -9,6 +9,7 @@ export async function addProduct(
   product: FormData,
 ) {
   const newProductSchema = ProductSchema.omit({ _id: true });
+  console.log("Product Data:", product);
 
   const parse = newProductSchema.safeParse({
     title: product.get("title"),
@@ -16,7 +17,7 @@ export async function addProduct(
     shortDescription: product.get("short-description"),
     categories: product.getAll("categories[_id]"),
     price: Number(product.get("price")),
-    images: product.get("product-image"),
+    image: product.get("image"),
     discount: Number(product.get("discount")),
     isPublished: true,
   });
