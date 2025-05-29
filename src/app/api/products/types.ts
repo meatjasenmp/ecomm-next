@@ -1,10 +1,4 @@
-import { z } from "zod";
-
-const ImageSchema = z.object({
-  url: z.string(),
-  isPrimary: z.boolean().optional(),
-  _id: z.string().optional(),
-});
+import { z } from "zod/v4";
 
 export const ProductSchema = z.object({
   _id: z.string(),
@@ -13,7 +7,7 @@ export const ProductSchema = z.object({
   shortDescription: z.string(),
   price: z.number(),
   categories: z.string().array(),
-  images: ImageSchema.array(),
+  image: z.any(),
   discount: z.number().optional(),
   isPublished: z.boolean(),
 });
