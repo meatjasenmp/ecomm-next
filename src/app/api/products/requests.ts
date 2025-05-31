@@ -1,4 +1,4 @@
-import { Product } from "./types";
+import { Product, Image } from "./types";
 
 const headers = {
   "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function uploadImages(images: File) {
     method: "POST",
     body: formData,
   });
-  return response;
+  return (await response.json()) as Image;
 }
 
 export async function createProduct(body: Product) {

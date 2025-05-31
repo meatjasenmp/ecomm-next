@@ -1,7 +1,7 @@
 "use server";
 
 import { createProduct, uploadImages } from "@/app/api/products/requests";
-import { ProductSchema, Product } from "@/app/api/products/types";
+import { ProductSchema, Product, Image } from "@/app/api/products/types";
 import { revalidatePath } from "next/cache";
 
 export async function addProduct(
@@ -15,7 +15,6 @@ export async function addProduct(
     shortDescription: product.get("short-description"),
     categories: product.getAll("categories[_id]"),
     price: Number(product.get("price")),
-    images: product.get("images"),
     discount: Number(product.get("discount")),
     isPublished: true,
   });
@@ -23,16 +22,36 @@ export async function addProduct(
   if (!parse.success) return { message: "Invalid Product Schema" };
 
   const data = parse.data as Product;
+  const images = product.get("images") as File;
 
-  try {
-    // Upload images to S3 and get the URLs
-    const images = product.get("images") as File;
-    await uploadImages(images);
-    await createProduct(data);
-    revalidatePath("/admin");
-    return { message: "Product created successfully" };
-  } catch (err) {
-    console.error("Error creating product:", err);
-    return { message: "Failed to create Product", error: err };
-  }
+  const productImages = async (): Promise<
+    Image | [] | { message: string; error: unknown }
+  > => {
+    try {
+      const img = await uploadImages(images);
+      return img;
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      return { message: "Failed to upload images", error };
+    }
+  };
+
+  const create = async (): Promise<{ message: string; error?: unknown }> => {
+    try {
+      let imagesResponse = await productImages();
+      if ("message" in imagesResponse) {
+        imagesResponse ? (imagesResponse = []) : imagesResponse;
+      }
+      console.log("Image upload response:", imagesResponse);
+      data.images = imagesResponse as Image[];
+      await createProduct(data);
+      revalidatePath("/admin");
+      return { message: "Product created successfully" };
+    } catch (err) {
+      console.error("Error creating product:", err);
+      return { message: "Failed to create Product", error: err };
+    }
+  };
+
+  await create();
 }
