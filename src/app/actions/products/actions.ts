@@ -42,7 +42,6 @@ export async function addProduct(
       if ("message" in imagesResponse) {
         imagesResponse ? (imagesResponse = []) : imagesResponse;
       }
-      console.log("Image upload response:", imagesResponse);
       data.images = imagesResponse as Image[];
       await createProduct(data);
       revalidatePath("/admin");
