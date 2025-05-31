@@ -10,7 +10,7 @@ export const ImageSchema = z.object({
 });
 
 export const ProductSchema = z.object({
-  _id: z.string(),
+  _id: z.string().optional(),
   title: z.string(),
   description: z.string(),
   shortDescription: z.string(),
