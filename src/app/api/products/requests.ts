@@ -11,7 +11,7 @@ export async function fetchProducts() {
   return (await response.json()) as Product[];
 }
 
-export async function uploadImages(images: File) {
+export async function uploadImagesRequest(images: File) {
   const formData = new FormData();
   formData.append("images", images);
   const response = await fetch(`${process.env.API_URL}/upload-images`, {
@@ -21,7 +21,7 @@ export async function uploadImages(images: File) {
   return (await response.json()) as Image;
 }
 
-export async function createProduct(body: Product) {
+export async function createProductRequest(body: Product) {
   const response = await fetch(`${process.env.API_URL}/create-product`, {
     method: "POST",
     headers,

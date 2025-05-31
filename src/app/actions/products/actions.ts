@@ -1,56 +1,46 @@
 "use server";
 
-import { createProduct, uploadImages } from "@/app/api/products/requests";
+import {
+  createProductRequest,
+  uploadImagesRequest,
+} from "@/app/api/products/requests";
 import { ProductSchema, Product, Image } from "@/app/api/products/types";
-import { revalidatePath } from "next/cache";
+
+async function productImages(images: File): Promise<Image[] | undefined> {
+  try {
+    return [await uploadImagesRequest(images)];
+  } catch (error) {
+    console.error("Error uploading images:", error);
+  }
+}
+
+async function createProduct(product: Product): Promise<void> {
+  try {
+    await createProductRequest(product);
+  } catch (error) {
+    console.error("Error creating product:", error);
+  }
+}
 
 export async function addProduct(
   prevState: { message: string },
-  product: FormData,
+  form: FormData,
 ) {
   const newProductSchema = ProductSchema.omit({ _id: true });
   const parse = newProductSchema.safeParse({
-    title: product.get("title"),
-    description: product.get("description"),
-    shortDescription: product.get("short-description"),
-    categories: product.getAll("categories[_id]"),
-    price: Number(product.get("price")),
-    discount: Number(product.get("discount")),
+    title: form.get("title"),
+    description: form.get("description"),
+    shortDescription: form.get("short-description"),
+    categories: form.getAll("categories[_id]"),
+    price: Number(form.get("price")),
+    discount: Number(form.get("discount")),
     isPublished: true,
   });
 
   if (!parse.success) return { message: "Invalid Product Schema" };
+  const product = parse.data as Product;
+  product.images = await productImages(form.get("images") as File);
 
-  const data = parse.data as Product;
-  const images = product.get("images") as File;
-
-  const productImages = async (): Promise<
-    Image | [] | { message: string; error: unknown }
-  > => {
-    try {
-      const img = await uploadImages(images);
-      return img;
-    } catch (error) {
-      console.error("Error uploading images:", error);
-      return { message: "Failed to upload images", error };
-    }
-  };
-
-  const create = async (): Promise<{ message: string; error?: unknown }> => {
-    try {
-      let imagesResponse = await productImages();
-      if ("message" in imagesResponse) {
-        imagesResponse ? (imagesResponse = []) : imagesResponse;
-      }
-      data.images = imagesResponse as Image[];
-      await createProduct(data);
-      revalidatePath("/admin");
-      return { message: "Product created successfully" };
-    } catch (err) {
-      console.error("Error creating product:", err);
-      return { message: "Failed to create Product", error: err };
-    }
-  };
-
-  await create();
+  await createProduct(product);
+  return { message: "Product created successfully" };
 }
