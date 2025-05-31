@@ -9,7 +9,7 @@ export default async function ProductsGrid() {
   if (!products.length) return <NotFound />;
 
   return (
-    <section className="w-4/5">
+    <section>
       <Grid>
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
