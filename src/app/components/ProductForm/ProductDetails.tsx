@@ -1,5 +1,6 @@
 import ProductTitle from "@/app/components/ProductForm/ProductTitle";
 import ProductDescription from "@/app/components/ProductForm/ProductDescription";
+import ProductShortDescription from "./ProductShortDescription";
 import ProductCategories from "@/app/components/ProductForm/ProductCategories";
 import ProductPrice from "@/app/components/ProductForm/ProductPrice";
 import ProductDiscount from "@/app/components/ProductForm/ProductDiscount";
@@ -12,6 +13,7 @@ export default function ProductDetails({ categories }: CategoriesProps) {
     <>
       <ProductTitle />
       <ProductDescription />
+      <ProductShortDescription />
       <ProductCategories categories={categories} />
       <ProductImages />
       <ProductPrice />

@@ -1,68 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Label,
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import {
-  labelStyles,
-  listBoxButtonStyles,
-  listBoxCheckIcon,
-  listBoxChevronContainer,
-  listBoxOptionsStyles,
-  listBoxOptionStyles,
-  listBoxOptionValueStyles,
-} from "@/app/components/ProductForm/styles";
-import { parseStyles } from "@/app/helpers/styles";
+import { Select } from "@base-ui-components/react/select";
 import { CategoriesProps } from "@/app/admin/page";
 
 export default function ProductCategories({ categories }: CategoriesProps) {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   return (
-    <Listbox
+    <Select.Root
       value={selectedCategory}
-      onChange={setSelectedCategory}
+      onValueChange={setSelectedCategory}
       name="categories"
     >
-      <Label className={parseStyles(labelStyles)}>Assigned to</Label>
-      <div className="relative mt-2">
-        <ListboxButton className={parseStyles(listBoxButtonStyles)}>
-          <span className="block truncate">{selectedCategory.name}</span>
-          <span className={parseStyles(listBoxChevronContainer)}>
-            <ChevronUpDownIcon
-              aria-hidden="true"
-              className="h-5 w-5 text-gray-400"
-            />
-          </span>
-        </ListboxButton>
-
-        <ListboxOptions
-          transition
-          className={parseStyles(listBoxOptionsStyles)}
-        >
-          {categories.map((category) => (
-            <ListboxOption
-              key={category._id}
-              value={category}
-              className={parseStyles(listBoxOptionStyles)}
-            >
-              <span className={parseStyles(listBoxOptionValueStyles)}>
-                {category.name}
-              </span>
-
-              <span className={parseStyles(listBoxCheckIcon)}>
-                <CheckIcon aria-hidden="true" className="h-5 w-5" />
-              </span>
-            </ListboxOption>
-          ))}
-        </ListboxOptions>
-      </div>
-    </Listbox>
+      <Select.Trigger>
+        <Select.Value placeholder="Product Category" />
+        <Select.Icon>
+          <ChevronUpDownIcon />
+        </Select.Icon>
+      </Select.Trigger>
+      <Select.Portal>
+        <Select.Positioner sideOffset={8}>
+          <Select.ScrollUpArrow />
+          <Select.Popup>
+            {categories.map((category) => (
+              <Select.Item key={category._id} value={category}>
+                <Select.ItemIndicator>
+                  <CheckIcon aria-hidden="true" />
+                </Select.ItemIndicator>
+                <Select.ItemText>{category.name}</Select.ItemText>
+              </Select.Item>
+            ))}
+          </Select.Popup>
+          <Select.ScrollDownArrow />
+        </Select.Positioner>
+      </Select.Portal>
+    </Select.Root>
   );
 }

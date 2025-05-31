@@ -1,21 +1,18 @@
-import { parseStyles } from "@/app/helpers/styles";
-import { inputStyles, labelStyles } from "@/app/components/ProductForm/styles";
+import { Field } from "@base-ui-components/react";
+import { Fieldset } from "@base-ui-components/react/fieldset";
 
 export default function ProductTitle() {
   return (
-    <div>
-      <label htmlFor="title" className={parseStyles(labelStyles)}>
-        Product Title
-      </label>
-      <div className="mt-2">
-        <input
+    <Fieldset.Root>
+      <Field.Root>
+        <Field.Label htmlFor="title">Product Title</Field.Label>
+        <Field.Control
           id="title"
           name="title"
           type="text"
           placeholder="Air Jordan 1"
-          className={parseStyles(inputStyles)}
         />
-      </div>
-    </div>
+      </Field.Root>
+    </Fieldset.Root>
   );
 }

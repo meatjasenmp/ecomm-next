@@ -17,12 +17,8 @@ export default function ProductForm({ categories }: CategoriesProps) {
 
   return (
     <Form action={formAction}>
-      <div className="space-y-12">
-        <div className="border-b border-gray-900/10 pb-12">
-          <ProductFormHeader />
-          <ProductDetails categories={categories} />
-        </div>
-      </div>
+      <ProductFormHeader />
+      <ProductDetails categories={categories} />
       <ProductFormFooter />
       {state?.message}
     </Form>
