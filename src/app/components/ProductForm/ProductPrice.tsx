@@ -8,7 +8,6 @@ export default function ProductPrice() {
         Price
       </Field.Label>
       <Field.Control
-        required
         id="price"
         name="price"
         type="text"

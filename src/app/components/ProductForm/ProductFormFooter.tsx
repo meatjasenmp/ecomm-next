@@ -6,10 +6,8 @@ export default function ProductFormFooter() {
   const { pending } = useFormStatus();
 
   return (
-    <div>
-      <Button disabled={pending} type="submit">
-        Save
-      </Button>
-    </div>
+    <Button disabled={pending} type="submit">
+      Save
+    </Button>
   );
 }
