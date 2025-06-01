@@ -1,14 +1,15 @@
 "use client";
 import { useFormStatus } from "react-dom";
+import Button from "@/app/components/Button";
 
 export default function ProductFormFooter() {
   const { pending } = useFormStatus();
 
   return (
     <div>
-      <button disabled={pending} type="submit">
+      <Button disabled={pending} type="submit">
         Save
-      </button>
+      </Button>
     </div>
   );
 }
