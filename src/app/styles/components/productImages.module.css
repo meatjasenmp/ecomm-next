@@ -1,0 +1,17 @@
+.container {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  position: relative;
+  padding: 4rem 1rem;
+}
+
+.icon {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 75px;
+  fill: #ccc;
+}
