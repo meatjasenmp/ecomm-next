@@ -2,22 +2,23 @@ import ProductTitle from "@/app/components/ProductForm/ProductTitle";
 import ProductDescription from "@/app/components/ProductForm/ProductDescription";
 import ProductShortDescription from "./ProductShortDescription";
 import ProductCategories from "@/app/components/ProductForm/ProductCategories";
-import ProductPrice from "@/app/components/ProductForm/ProductPrice";
-import ProductDiscount from "@/app/components/ProductForm/ProductDiscount";
-import ProductImages from "@/app/components/ProductForm/ProductImages";
 import { CategoriesProps } from "@/app/admin/page";
+import { Fieldset } from "@base-ui-components/react/fieldset";
+import styles from "@/app/styles/components/form.module.css";
 
 // TODO: Loading State for Categories. Confirm this is the ideal pattern for requests.
 export default function ProductDetails({ categories }: CategoriesProps) {
   return (
     <>
-      <ProductTitle />
-      <ProductDescription />
-      <ProductShortDescription />
-      <ProductCategories categories={categories} />
-      <ProductImages />
-      <ProductPrice />
-      <ProductDiscount />
+      <Fieldset.Root className={styles.fieldset}>
+        <Fieldset.Legend className={styles.fieldlegend}>
+          Product Details
+        </Fieldset.Legend>
+        <ProductTitle />
+        <ProductDescription />
+        <ProductShortDescription />
+        <ProductCategories categories={categories} />
+      </Fieldset.Root>
     </>
   );
 }
