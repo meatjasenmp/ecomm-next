@@ -15,8 +15,8 @@ export default function ProductDetails({ categories }: CategoriesProps) {
           Product Details
         </Fieldset.Legend>
         <ProductTitle />
-        <ProductDescription />
         <ProductShortDescription />
+        <ProductDescription />
         <ProductCategories categories={categories} />
       </Fieldset.Root>
     </>

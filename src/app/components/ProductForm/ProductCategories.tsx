@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Select } from "@base-ui-components/react/select";
 import { CategoriesProps } from "@/app/admin/page";
+import styles from "@/app/styles/components/form.module.css";
 
 export default function ProductCategories({ categories }: CategoriesProps) {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -14,22 +15,31 @@ export default function ProductCategories({ categories }: CategoriesProps) {
       onValueChange={setSelectedCategory}
       name="categories"
     >
-      <Select.Trigger>
+      <Select.Trigger className={styles.select}>
         <Select.Value placeholder="Product Category" />
         <Select.Icon>
           <ChevronUpDownIcon />
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
-        <Select.Positioner sideOffset={8}>
+        <Select.Positioner>
           <Select.ScrollUpArrow />
-          <Select.Popup>
+          <Select.Popup className={styles.popup}>
             {categories.map((category) => (
-              <Select.Item key={category._id} value={category}>
-                <Select.ItemIndicator>
-                  <CheckIcon aria-hidden="true" />
+              <Select.Item
+                key={category._id}
+                value={category}
+                className={styles.item}
+              >
+                <Select.ItemIndicator className={styles.itemindicator}>
+                  <CheckIcon
+                    aria-hidden="true"
+                    className={styles.itemindicatoricon}
+                  />
                 </Select.ItemIndicator>
-                <Select.ItemText>{category.name}</Select.ItemText>
+                <Select.ItemText className={styles.itemtext}>
+                  {category.name}
+                </Select.ItemText>
               </Select.Item>
             ))}
           </Select.Popup>
