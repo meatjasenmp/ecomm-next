@@ -2,7 +2,6 @@
 
 import Form from "next/form";
 import { useActionState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { Fieldset } from "@base-ui-components/react/fieldset";
 import { addProduct } from "@/app/actions/products/actions";
 import ProductFormHeader from "@/app/components/ProductForm/ProductFormHeader";
@@ -16,29 +15,12 @@ import ProductImages from "./ProductImages";
 import ProductPrice from "./ProductPrice";
 import ProductShortDescription from "./ProductShortDescription";
 import ProductTitle from "./ProductTitle";
-import { ErrorProperties } from "@/app/api/products/types";
+import DisplayErrors, { hasError } from "./DisplayErrors";
 
 const initialState = {
   message: "",
   error: undefined,
 };
-
-function DisplayErrors({ errors }: { errors: ErrorProperties }) {
-  return (
-    <ul>
-      {Object.values(errors!).map((err, i) => {
-        return <li key={uuidv4()}>{err.errors.join(", ")}</li>;
-      })}
-    </ul>
-  );
-}
-
-function hasError(
-  errors: ErrorProperties | undefined,
-  fieldName: string,
-): boolean {
-  return errors ? Object.keys(errors).includes(fieldName) : false;
-}
 
 export default function ProductForm({ categories }: CategoriesProps) {
   const [state, formAction] = useActionState(addProduct, initialState);
