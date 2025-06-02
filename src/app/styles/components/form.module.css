@@ -148,3 +148,7 @@
 .itemtext {
   grid-column-start: 2;
 }
+
+.error {
+  border: 1px solid red;
+}

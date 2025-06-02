@@ -46,7 +46,6 @@ async function createProduct(
 
 function getErrors(error: ZodError<Product>): ErrorProperties {
   const errors = z.treeifyError(error);
-  console.error("Validation errors:", errors.properties);
   return errors.properties;
 }
 

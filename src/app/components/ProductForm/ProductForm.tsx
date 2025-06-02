@@ -25,12 +25,19 @@ const initialState = {
 
 function DisplayErrors({ errors }: { errors: ErrorProperties }) {
   return (
-    <ul className={styles.error}>
+    <ul>
       {Object.values(errors!).map((err, i) => {
         return <li key={uuidv4()}>{err.errors.join(", ")}</li>;
       })}
     </ul>
   );
+}
+
+function hasError(
+  errors: ErrorProperties | undefined,
+  fieldName: string,
+): boolean {
+  return errors ? Object.keys(errors).includes(fieldName) : false;
 }
 
 export default function ProductForm({ categories }: CategoriesProps) {
@@ -43,7 +50,7 @@ export default function ProductForm({ categories }: CategoriesProps) {
         <Fieldset.Legend className={styles.fieldlegend}>
           Product Details
         </Fieldset.Legend>
-        <ProductTitle />
+        <ProductTitle hasError={hasError(state?.error, "title")} />
         <ProductShortDescription />
         <ProductDescription />
         <ProductCategories categories={categories} />

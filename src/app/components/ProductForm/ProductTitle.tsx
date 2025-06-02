@@ -1,7 +1,8 @@
 import { Field } from "@base-ui-components/react";
 import styles from "@/app/styles/components/form.module.css";
+import classNames from "classnames";
 
-export default function ProductTitle() {
+export default function ProductTitle({ hasError }: { hasError: boolean }) {
   return (
     <Field.Root className={styles.fieldroot}>
       <Field.Label htmlFor="title" className={styles.fieldlabel}>
@@ -12,7 +13,7 @@ export default function ProductTitle() {
         name="title"
         type="text"
         placeholder="Air Jordan 1"
-        className={styles.fieldcontrol}
+        className={classNames(styles.fieldcontrol, hasError && styles.error)}
       />
     </Field.Root>
   );
