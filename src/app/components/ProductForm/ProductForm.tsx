@@ -16,16 +16,25 @@ import ProductImages from "./ProductImages";
 import ProductPrice from "./ProductPrice";
 import ProductShortDescription from "./ProductShortDescription";
 import ProductTitle from "./ProductTitle";
+import { ErrorProperties } from "@/app/api/products/types";
 
 const initialState = {
   message: "",
   error: undefined,
 };
 
+function DisplayErrors({ errors }: { errors: ErrorProperties }) {
+  return (
+    <ul className={styles.error}>
+      {Object.values(errors!).map((err, i) => {
+        return <li key={uuidv4()}>{err.errors.join(", ")}</li>;
+      })}
+    </ul>
+  );
+}
+
 export default function ProductForm({ categories }: CategoriesProps) {
   const [state, formAction] = useActionState(addProduct, initialState);
-
-  console.log("ProductForm state:", state.error);
 
   return (
     <Form action={formAction} className={styles.form}>
@@ -44,13 +53,7 @@ export default function ProductForm({ categories }: CategoriesProps) {
       </Fieldset.Root>
       <ProductFormFooter />
       <h5>{state?.message}</h5>
-      {state?.error && (
-        <ul className={styles.error}>
-          {Object.values(state.error).map((err, i) => {
-            return <li key={uuidv4()}>{err.errors.join(", ")}</li>;
-          })}
-        </ul>
-      )}
+      {state?.error && <DisplayErrors errors={state.error} />}
     </Form>
   );
 }
