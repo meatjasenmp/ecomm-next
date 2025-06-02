@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Select } from "@base-ui-components/react/select";
-import { CategoriesProps } from "@/app/admin/page";
+import { CategoriesProps } from "@/app/admin/create/page";
 import styles from "@/app/styles/components/form.module.css";
 
 export default function ProductCategories({ categories }: CategoriesProps) {

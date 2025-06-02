@@ -4,8 +4,14 @@ import {
   createProductRequest,
   uploadImagesRequest,
 } from "@/app/api/products/requests";
-import { ProductSchema, Product, Image } from "@/app/api/products/types";
-import { ZodSafeParseResult } from "zod/v4";
+import {
+  ProductSchema,
+  Product,
+  Image,
+  ErrorProperties,
+} from "@/app/api/products/types";
+import { ZodError, ZodSafeParseResult } from "zod/v4";
+import z from "zod/v4";
 
 function parseFormData(form: FormData): ZodSafeParseResult<Product> {
   return ProductSchema.safeParse({
@@ -38,14 +44,22 @@ async function createProduct(
   }
 }
 
+function getErrors(error: ZodError<Product>): ErrorProperties {
+  const errors = z.treeifyError(error);
+  console.error("Validation errors:", errors.properties);
+  return errors.properties;
+}
+
 export async function addProduct(
   prevState: { message: string },
   form: FormData,
 ) {
-  const parse = parseFormData(form);
-  if (!parse.success) return { message: "Invalid Product Schema" };
+  const { success, error, data } = parseFormData(form);
+  if (!success) {
+    return { message: "Invalid Product Schema", error: getErrors(error) };
+  }
 
-  const product = parse.data as Product;
+  const product = data as Product;
   const productImages = form.get("images") as File;
   product.images = await getProductImages(productImages);
 
