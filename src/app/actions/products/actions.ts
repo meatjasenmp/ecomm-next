@@ -56,7 +56,7 @@ export async function addProduct(
 ) {
   const { success, error, data } = parseFormData(form);
   if (!success) {
-    return { message: "Invalid Product Schema", error: getErrors(error) };
+    return { message: "Invalid Product", error: getErrors(error) };
   }
 
   const product = data as Product;

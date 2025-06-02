@@ -43,7 +43,7 @@ export default function ProductForm({ categories }: CategoriesProps) {
         <ProductDiscount />
       </Fieldset.Root>
       <ProductFormFooter />
-      {state?.message}
+      <h5>{state?.message}</h5>
       {state?.error && (
         <ul className={styles.error}>
           {Object.values(state.error).map((err, i) => {
