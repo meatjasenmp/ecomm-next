@@ -1,7 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-
+import Container from "@/app/parts/Container";
+import Sidebar from "@/app/parts/Sidebar";
 import "@/app/styles/globals.css";
 
 const roboto = Roboto({
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="root">
-        <main className={roboto.className}>{children}</main>
+        <main className={roboto.className}>
+          <Sidebar>Sidebar</Sidebar>
+          <Container>{children}</Container>
+        </main>
       </body>
     </html>
   );
