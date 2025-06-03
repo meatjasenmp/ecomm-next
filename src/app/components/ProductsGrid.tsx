@@ -1,6 +1,6 @@
 import { fetchProducts } from "@/app/api/products/requests";
 import Grid from "@/app/components/Grid";
-import ProductCard from "@/app/components/ProductCard";
+import ProductCard from "@/app/components/Cards/ProductCard";
 import NotFound from "@/app/components/NotFound";
 
 export default async function ProductsGrid({ isAdmin }: { isAdmin?: boolean }) {
