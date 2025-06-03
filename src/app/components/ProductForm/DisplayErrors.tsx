@@ -11,7 +11,7 @@ export function hasError(
 export default function DisplayErrors({ errors }: { errors: ErrorProperties }) {
   return (
     <ul>
-      {Object.values(errors!).map((err, i) => {
+      {Object.values(errors!).map((err) => {
         return <li key={uuidv4()}>{err.errors.join(", ")}</li>;
       })}
     </ul>

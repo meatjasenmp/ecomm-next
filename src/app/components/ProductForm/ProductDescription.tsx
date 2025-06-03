@@ -1,7 +1,9 @@
 import { Field } from "@base-ui-components/react/field";
+import { HasError } from "./ProductForm";
 import styles from "@/app/styles/components/form.module.css";
+import classNames from "classnames";
 
-export default function ProductDescription() {
+export default function ProductDescription({ hasError }: HasError) {
   return (
     <Field.Root className={styles.fieldroot}>
       <Field.Label htmlFor="description" className={styles.fieldlabel}>
@@ -11,7 +13,7 @@ export default function ProductDescription() {
         id="description"
         name="description"
         rows={6}
-        className={styles.textarea}
+        className={classNames(styles.fieldcontrol, hasError && styles.error)}
       />
     </Field.Root>
   );

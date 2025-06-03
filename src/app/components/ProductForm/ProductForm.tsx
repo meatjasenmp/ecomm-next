@@ -22,6 +22,10 @@ const initialState = {
   error: undefined,
 };
 
+export type HasError = {
+  hasError: boolean;
+};
+
 export default function ProductForm({ categories }: CategoriesProps) {
   const [state, formAction] = useActionState(addProduct, initialState);
 
@@ -33,11 +37,14 @@ export default function ProductForm({ categories }: CategoriesProps) {
           Product Details
         </Fieldset.Legend>
         <ProductTitle hasError={hasError(state?.error, "title")} />
+        <ProductDescription hasError={hasError(state?.error, "description")} />
         <ProductShortDescription />
-        <ProductDescription />
-        <ProductCategories categories={categories} />
+        <ProductCategories
+          categories={categories}
+          hasError={hasError(state?.error, "categories")}
+        />
         <ProductImages />
-        <ProductPrice />
+        <ProductPrice hasError={hasError(state?.error, "price")} />
         <ProductDiscount />
       </Fieldset.Root>
       <ProductFormFooter />

@@ -1,7 +1,9 @@
 import { Field } from "@base-ui-components/react/field";
+import { HasError } from "./ProductForm";
 import styles from "@/app/styles/components/form.module.css";
+import classNames from "classnames";
 
-export default function ProductPrice() {
+export default function ProductPrice({ hasError }: HasError) {
   return (
     <Field.Root className={styles.fieldroot}>
       <Field.Label htmlFor="price" className={styles.fieldlabel}>
@@ -12,7 +14,7 @@ export default function ProductPrice() {
         name="price"
         type="text"
         placeholder="0.00"
-        className={styles.fieldcontrol}
+        className={classNames(styles.fieldcontrol, hasError && styles.error)}
       />
     </Field.Root>
   );
