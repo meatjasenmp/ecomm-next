@@ -7,15 +7,15 @@ export type ButtonProps = {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   disabled?: boolean;
-  className?: string;
+  className?: [key: string];
 };
 
 export default function Button({
   children,
   type = "button",
   onClick,
-  disabled = false,
-  className = "",
+  disabled,
+  className,
 }: ButtonProps) {
   const classes = classNames(styles.button, className);
   return (
