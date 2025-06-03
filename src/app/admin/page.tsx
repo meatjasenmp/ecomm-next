@@ -1,3 +1,5 @@
+import ProductsGrid from "@/app/components/ProductsGrid";
+
 export default async function Page() {
-  return <h1>Product List</h1>;
+  return <ProductsGrid isAdmin={true} />;
 }

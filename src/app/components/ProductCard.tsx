@@ -4,6 +4,7 @@ import styles from "@/app/styles/components/card.module.css";
 
 interface ProductCardProps {
   product: Product;
+  isAdmin: boolean | undefined;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
