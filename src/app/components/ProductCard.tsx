@@ -7,14 +7,33 @@ interface ProductCardProps {
   isAdmin: boolean | undefined;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+const CardContent = ({ product }: { product: Product }) => {
   return (
-    <PreviewCard.Root>
-      <PreviewCard.Trigger href="#" className={styles.card}>
+    <PreviewCard.Trigger href="#" className={styles.card}>
+      <div className={styles.cardContent}>
         <h2>{product.title}</h2>
         <p>{product.description}</p>
         <p>${product.price}</p>
-      </PreviewCard.Trigger>
+      </div>
+    </PreviewCard.Trigger>
+  );
+};
+
+const AdminCardContent = ({ product }: { product: Product }) => {
+  return (
+    <PreviewCard.Trigger href="#" className={styles.card}>
+      <div className={styles.cardContent}>
+        <h2>{product.title}</h2>
+      </div>
+    </PreviewCard.Trigger>
+  );
+};
+
+export default function ProductCard({ product, isAdmin }: ProductCardProps) {
+  return (
+    <PreviewCard.Root>
+      {!isAdmin && <CardContent product={product} />}
+      {isAdmin && <AdminCardContent product={product} />}
     </PreviewCard.Root>
   );
 }
