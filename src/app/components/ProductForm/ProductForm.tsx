@@ -1,12 +1,13 @@
 "use client";
 
 import Form from "next/form";
+import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { Fieldset } from "@base-ui-components/react/fieldset";
 import { addProduct } from "@/app/actions/products/actions";
 import ProductFormHeader from "@/app/components/ProductForm/ProductFormHeader";
 import ProductFormFooter from "@/app/components/ProductForm/ProductFormFooter";
-import { CategoriesProps } from "@/app/admin/create/page";
+import { CategoriesProps } from "@/app/admin/products/create/page";
 import styles from "@/app/styles/components/form.module.css";
 import ProductCategories from "./ProductCategories";
 import ProductDescription from "./ProductDescription";
@@ -28,7 +29,9 @@ export type HasError = {
 
 export default function ProductForm({ categories }: CategoriesProps) {
   const [state, formAction] = useActionState(addProduct, initialState);
-
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("id");
+  console.info("Product ID:", productId);
   return (
     <Form action={formAction} className={styles.form}>
       <ProductFormHeader />

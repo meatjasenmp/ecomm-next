@@ -2,7 +2,6 @@ import { Product } from "@/app/api/products/types";
 import { PreviewCard } from "@base-ui-components/react/preview-card";
 import DefaultCardContent from "@/app/components/Cards/DefaultCardContent";
 import AdminCardContent from "@/app/components/Cards/AdminCardContent";
-import styles from "@/app/styles/components/card.module.css";
 
 interface ProductCardProps {
   product: Product;

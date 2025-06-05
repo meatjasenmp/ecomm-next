@@ -4,7 +4,10 @@ import { PreviewCard } from "@base-ui-components/react/preview-card";
 
 export default function AdminCardContent({ product }: { product: Product }) {
   return (
-    <PreviewCard.Trigger href="#" className={styles.card}>
+    <PreviewCard.Trigger
+      href={`/admin/products/edit/?id=${product._id}`}
+      className={styles.card}
+    >
       <div className={styles.cardContent}>
         <h2>{product.title}</h2>
       </div>
