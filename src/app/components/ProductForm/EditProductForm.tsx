@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "next/form";
+import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { Fieldset } from "@base-ui-components/react/fieldset";
 import { addProduct } from "@/app/actions/products/actions";
@@ -26,12 +27,15 @@ export type HasError = {
   hasError: boolean;
 };
 
-export default function ProductForm({ categories }: CategoriesProps) {
+export default function EditProductForm({ categories }: CategoriesProps) {
   const [state, formAction] = useActionState(addProduct, initialState);
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("id");
+
   return (
     <Form action={formAction} className={styles.form}>
-      <h2>Create Product</h2>;
-      <Fieldset.Root className={styles.fieldset}>
+      <h2>Edit Product</h2>
+      {/* <Fieldset.Root className={styles.fieldset}>
         <Fieldset.Legend className={styles.fieldlegend}>
           Product Details
         </Fieldset.Legend>
@@ -48,7 +52,7 @@ export default function ProductForm({ categories }: CategoriesProps) {
       </Fieldset.Root>
       <ProductFormFooter />
       <h5>{state?.message}</h5>
-      {state?.error && <DisplayErrors errors={state.error} />}
+      {state?.error && <DisplayErrors errors={state.error} />} */}
     </Form>
   );
 }

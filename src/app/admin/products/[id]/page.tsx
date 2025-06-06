@@ -1,4 +1,4 @@
-import ProductForm from "@/app/components/ProductForm/ProductForm";
+import EditProductForm from "@/app/components/ProductForm/EditProductForm";
 import { fetchCategories } from "@/app/api/categories/requests";
 import { Category } from "@/app/api/categories/types";
 
@@ -9,5 +9,5 @@ export interface CategoriesProps {
 export default async function Page() {
   const categories = await fetchCategories();
 
-  return <ProductForm categories={categories} />;
+  return <EditProductForm categories={categories} />;
 }
