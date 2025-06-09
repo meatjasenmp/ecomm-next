@@ -1,5 +1,7 @@
 import EditProductForm from "@/app/components/ProductForm/EditProductForm";
 import { Category } from "@/app/api/categories/types";
+import { getProductRequest } from "@/app/api/products/requests";
+import { Product } from "@/app/api/products/types";
 
 export interface CategoriesProps {
   categories: Category[];
@@ -11,5 +13,8 @@ type EditPageProps = {
 
 export default async function Page({ searchParams }: EditPageProps) {
   const { id } = await searchParams;
-  return <EditProductForm id={id} />;
+
+  const product = (await getProductRequest(id)) as Product;
+
+  return <EditProductForm product={product} />;
 }

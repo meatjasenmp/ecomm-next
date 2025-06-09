@@ -30,11 +30,8 @@ export async function createProductRequest(body: Product) {
   return (await response.json()) as Product;
 }
 
+// TODO: try/catch for error handling
 export async function getProductRequest(id: string) {
-  const response = await fetch(`${process.env.API_URL}/get-product`, {
-    body: JSON.stringify({ id }),
-    headers,
-  });
-
+  const response = await fetch(`${process.env.API_URL}/product/${id}`);
   return (await response.json()) as Product;
 }

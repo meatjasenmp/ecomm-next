@@ -3,6 +3,7 @@
 import Form from "next/form";
 import { useActionState } from "react";
 import { Fieldset } from "@base-ui-components/react/fieldset";
+import { getProductRequest } from "@/app/api/products/requests";
 import { addProduct } from "@/app/actions/products/actions";
 import ProductFormFooter from "@/app/components/ProductForm/ProductFormFooter";
 import { CategoriesProps } from "@/app/admin/products/create/page";
@@ -27,9 +28,9 @@ export type HasError = {
   hasError: boolean;
 };
 
-export default function EditProductForm({ id }: { id: string }) {
+export default function EditProductForm({ product }: { product: Product }) {
   const [state, formAction] = useActionState(addProduct, initialState);
-  console.info("Fetching product with ID:", id);
+  console.info("Product:", product);
   return (
     <Form action={formAction} className={styles.form}>
       <h2>Edit Product</h2>
