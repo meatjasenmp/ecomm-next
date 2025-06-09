@@ -29,3 +29,12 @@ export async function createProductRequest(body: Product) {
   });
   return (await response.json()) as Product;
 }
+
+export async function getProductRequest(id: string) {
+  const response = await fetch(`${process.env.API_URL}/get-product`, {
+    body: JSON.stringify({ id }),
+    headers,
+  });
+
+  return (await response.json()) as Product;
+}

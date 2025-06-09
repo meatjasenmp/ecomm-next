@@ -1,13 +1,15 @@
 import EditProductForm from "@/app/components/ProductForm/EditProductForm";
-import { fetchCategories } from "@/app/api/categories/requests";
 import { Category } from "@/app/api/categories/types";
 
 export interface CategoriesProps {
   categories: Category[];
 }
 
-export default async function Page() {
-  const categories = await fetchCategories();
+type EditPageProps = {
+  searchParams: Promise<{ [key: string]: string }>;
+};
 
-  return <EditProductForm categories={categories} />;
+export default async function Page({ searchParams }: EditPageProps) {
+  const { id } = await searchParams;
+  return <EditProductForm id={id} />;
 }

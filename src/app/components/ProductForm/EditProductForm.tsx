@@ -1,7 +1,6 @@
 "use client";
 
 import Form from "next/form";
-import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { Fieldset } from "@base-ui-components/react/fieldset";
 import { addProduct } from "@/app/actions/products/actions";
@@ -16,6 +15,8 @@ import ProductPrice from "./ProductPrice";
 import ProductShortDescription from "./ProductShortDescription";
 import ProductTitle from "./ProductTitle";
 import DisplayErrors, { hasError } from "./DisplayErrors";
+import { Product } from "@/app/api/products/types";
+import { useFormState } from "react-dom";
 
 const initialState = {
   message: "",
@@ -26,11 +27,9 @@ export type HasError = {
   hasError: boolean;
 };
 
-export default function EditProductForm({ categories }: CategoriesProps) {
+export default function EditProductForm({ id }: { id: string }) {
   const [state, formAction] = useActionState(addProduct, initialState);
-  const searchParams = useSearchParams();
-  const productId = searchParams.get("id");
-
+  console.info("Fetching product with ID:", id);
   return (
     <Form action={formAction} className={styles.form}>
       <h2>Edit Product</h2>
