@@ -5,13 +5,8 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Select } from "@base-ui-components/react/select";
 import { CategoriesProps } from "@/app/admin/products/create/page";
 import styles from "@/app/styles/components/form.module.css";
-import { HasError } from "./ProductForm";
-import classNames from "classnames";
 
-export default function ProductCategories({
-  categories,
-  hasError,
-}: CategoriesProps & HasError) {
+export default function ProductCategories({ categories }: CategoriesProps) {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   return (
@@ -20,10 +15,8 @@ export default function ProductCategories({
       onValueChange={setSelectedCategory}
       name="categories"
     >
-      <Select.Trigger
-        className={classNames(styles.select, hasError && styles.error)}
-      >
-        <Select.Value placeholder="Product Category" />
+      <Select.Trigger className={styles.select}>
+        <Select.Value placeholder={selectedCategory.name} />
         <Select.Icon>
           <ChevronUpDownIcon />
         </Select.Icon>
@@ -35,7 +28,7 @@ export default function ProductCategories({
             {categories.map((category) => (
               <Select.Item
                 key={category._id}
-                value={category._id}
+                value={category}
                 className={styles.item}
               >
                 <Select.ItemIndicator className={styles.itemindicator}>
