@@ -37,10 +37,7 @@ export default function ProductForm({ categories }: CategoriesProps) {
         <ProductTitle hasError={hasError(state?.error, "title")} />
         <ProductDescription hasError={hasError(state?.error, "description")} />
         <ProductShortDescription />
-        <ProductCategories
-          categories={categories}
-          hasError={hasError(state?.error, "categories")}
-        />
+        <ProductCategories categories={categories} />
         <ProductImages />
         <ProductPrice hasError={hasError(state?.error, "price")} />
         <ProductDiscount />
