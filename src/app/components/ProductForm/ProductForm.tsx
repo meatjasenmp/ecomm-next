@@ -29,7 +29,7 @@ export default function ProductForm({ categories }: CategoriesProps) {
   const [state, formAction] = useActionState(addProduct, initialState);
   return (
     <Form action={formAction} className={styles.form}>
-      <h2>Create Product</h2>;
+      <h2>Create Product</h2>
       <Fieldset.Root className={styles.fieldset}>
         <Fieldset.Legend className={styles.fieldlegend}>
           Product Details

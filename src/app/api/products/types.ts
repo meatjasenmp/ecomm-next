@@ -14,13 +14,13 @@ export const ProductSchema = z.object({
   title: z.string().min(5, "A Product title is required"),
   description: z.string().min(10, "A Product description is required"),
   shortDescription: z.string().optional(),
+  categories: z.string().array().min(1, "At least one category is required"),
+  images: z.custom<Image>().array().optional(),
   price: z
     .number()
     .gt(0, "A Product price is required")
     .min(0, "Price must be a positive number"),
   discount: z.number().min(0, "Price must be a positive number").optional(),
-  categories: z.string().array().min(1, "At least one category is required"),
-  images: z.custom<Image>().array().optional(),
   isPublished: z.boolean(),
 });
 

@@ -14,11 +14,12 @@ import { ZodError, ZodSafeParseResult } from "zod/v4";
 import z from "zod/v4";
 
 function parseFormData(form: FormData): ZodSafeParseResult<Product> {
+  console.info("Categories:", form.getAll("categories"));
   return ProductSchema.safeParse({
     title: form.get("title"),
     description: form.get("description"),
     shortDescription: form.get("short-description"),
-    categories: form.getAll("categories[_id]"),
+    categories: form.getAll("categories"),
     price: Number(form.get("price")),
     discount: Number(form.get("discount")),
     isPublished: true,
@@ -39,13 +40,13 @@ async function createProduct(
   try {
     await createProductRequest(product);
   } catch (error) {
-    console.error("Error creating product:", error);
     return { message: "Error creating product" };
   }
 }
 
 function getErrors(error: ZodError<Product>): ErrorProperties {
   const errors = z.treeifyError(error);
+  console.error("Validation errors:", errors.properties);
   return errors.properties;
 }
 

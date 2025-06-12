@@ -10,7 +10,6 @@ export default function ProductDescription({ hasError }: HasError) {
         Description
       </Field.Label>
       <textarea
-        id="description"
         name="description"
         rows={6}
         className={classNames(styles.fieldcontrol, hasError && styles.error)}

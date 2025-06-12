@@ -35,7 +35,7 @@ export default function ProductCategories({
             {categories.map((category) => (
               <Select.Item
                 key={category._id}
-                value={category}
+                value={category._id}
                 className={styles.item}
               >
                 <Select.ItemIndicator className={styles.itemindicator}>

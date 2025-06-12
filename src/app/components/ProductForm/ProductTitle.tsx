@@ -10,9 +10,8 @@ export default function ProductTitle({ hasError }: HasError) {
         Product Title
       </Field.Label>
       <Field.Control
-        id="title"
-        name="title"
         type="text"
+        name="title"
         placeholder="Air Jordan 1"
         className={classNames(styles.fieldcontrol, hasError && styles.error)}
       />
