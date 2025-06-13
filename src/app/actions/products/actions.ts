@@ -8,18 +8,33 @@ import {
   ProductSchema,
   Product,
   Image,
+  Category,
   ErrorProperties,
 } from "@/app/api/products/types";
 import { ZodError, ZodSafeParseResult } from "zod/v4";
 import z from "zod/v4";
+import { ca } from "zod/v4/locales";
+
+function parseCategories(categories: string[]): Category[] {
+  console.info("Parsing Categories:", categories);
+  return categories.map((category) => {
+    try {
+      return JSON.parse(category) as Category;
+    } catch (error) {
+      console.error("Error parsing category:", error);
+      return { _id: "", name: "", description: "" };
+    }
+  });
+}
 
 function parseFormData(form: FormData): ZodSafeParseResult<Product> {
-  console.info("Categories:", form.getAll("categories"));
+  const categories = parseCategories(form.getAll("categories") as string[]);
+  console.info("Parsed Categories:", categories);
   return ProductSchema.safeParse({
     title: form.get("title"),
     description: form.get("description"),
     shortDescription: form.get("short-description"),
-    categories: form.getAll("categories"),
+    categories: form.getAll("categories") as string[],
     price: Number(form.get("price")),
     discount: Number(form.get("discount")),
     isPublished: true,
@@ -46,7 +61,6 @@ async function createProduct(
 
 function getErrors(error: ZodError<Product>): ErrorProperties {
   const errors = z.treeifyError(error);
-  console.error("Validation errors:", errors.properties);
   return errors.properties;
 }
 
@@ -62,6 +76,7 @@ export async function addProduct(
   const product = data as Product;
   const productImages = form.get("images") as File;
   product.images = await getProductImages(productImages);
+  product.categories = parseCategories(form.getAll("categories") as string[]);
 
   await createProduct(product);
   return { message: "Product created successfully" };

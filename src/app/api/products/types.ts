@@ -9,12 +9,18 @@ export const ImageSchema = z.object({
   createdAt: z.string(),
 });
 
+export const CategorySchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  description: z.string(),
+});
+
 export const ProductSchema = z.object({
   _id: z.string().optional(),
   title: z.string().min(5, "A Product title is required"),
   description: z.string().min(10, "A Product description is required"),
   shortDescription: z.string().optional(),
-  categories: z.string().array().min(1, "At least one category is required"),
+  categories: z.string().array(),
   images: z.custom<Image>().array().optional(),
   price: z
     .number()
@@ -34,3 +40,4 @@ export type ErrorProperties =
 
 export type Product = z.infer<typeof ProductSchema>;
 export type Image = z.infer<typeof ImageSchema>;
+export type Category = z.infer<typeof CategorySchema>;
