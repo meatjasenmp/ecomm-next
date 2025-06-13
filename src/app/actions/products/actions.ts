@@ -28,13 +28,11 @@ function parseCategories(categories: string[]): Category[] {
 }
 
 function parseFormData(form: FormData): ZodSafeParseResult<Product> {
-  const categories = parseCategories(form.getAll("categories") as string[]);
-  console.info("Parsed Categories:", categories);
   return ProductSchema.safeParse({
     title: form.get("title"),
     description: form.get("description"),
     shortDescription: form.get("short-description"),
-    categories: form.getAll("categories") as string[],
+    categories: form.getAll("categories"),
     price: Number(form.get("price")),
     discount: Number(form.get("discount")),
     isPublished: true,

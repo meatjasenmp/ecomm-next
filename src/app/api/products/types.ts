@@ -20,7 +20,7 @@ export const ProductSchema = z.object({
   title: z.string().min(5, "A Product title is required"),
   description: z.string().min(10, "A Product description is required"),
   shortDescription: z.string().optional(),
-  categories: z.string().array(),
+  categories: z.custom<Category>().array(),
   images: z.custom<Image>().array().optional(),
   price: z
     .number()
