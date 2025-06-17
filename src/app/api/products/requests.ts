@@ -1,4 +1,4 @@
-import { Product, Image } from "./types";
+import { Product } from "./types";
 
 const headers = {
   "Content-Type": "application/json",
@@ -9,16 +9,6 @@ export async function fetchProducts() {
     cache: "no-store",
   });
   return (await response.json()) as Product[];
-}
-
-export async function uploadImagesRequest(images: File) {
-  const formData = new FormData();
-  formData.append("images", images);
-  const response = await fetch(`${process.env.API_URL}/upload-images`, {
-    method: "POST",
-    body: formData,
-  });
-  return (await response.json()) as Image;
 }
 
 export async function createProductRequest(body: Product) {

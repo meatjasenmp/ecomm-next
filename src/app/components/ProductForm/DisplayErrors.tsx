@@ -1,4 +1,4 @@
-import { ErrorProperties } from "@/app/api/products/types";
+import { ErrorProperties } from "@/app/actions/types";
 import { v4 as uuidv4 } from "uuid";
 
 export function hasError(

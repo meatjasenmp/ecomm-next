@@ -1,26 +1,16 @@
 import { z } from "zod/v4";
 import { parseCategories } from "../categories/utilities";
-
-export const ImageSchema = z.object({
-  name: z.string(),
-  key: z.string(),
-  url: z.string(),
-  isPrimary: z.boolean(),
-  _id: z.string(),
-  createdAt: z.string(),
-});
-
-export const CategorySchema = z.object({
-  _id: z.string(),
-  name: z.string(),
-  description: z.string(),
-});
+import { Category } from "../categories/types";
+import { Image } from "../images/types";
+import { refineImageFiles } from "../images/utilities";
 
 export const ProductSchema = z.object({
   _id: z.string().optional(),
   title: z.string().min(5, "A Product title is required"),
   description: z.string().min(10, "A Product description is required"),
-  shortDescription: z.string().optional(),
+  shortDescription: z
+    .string()
+    .min(5, "A Product short description is required"),
   categories: z
     .custom<Category>()
     .array()
@@ -28,16 +18,9 @@ export const ProductSchema = z.object({
   images: z
     .custom<Image | File>()
     .array()
-    .refine(
-      (images) => {
-        if (typeof images[0] === "object" && images[0] instanceof File) {
-          return images.every(
-            (image) => image instanceof File && image.size > 0,
-          );
-        }
-      },
-      { message: "At least one image is required" },
-    ),
+    .refine((images) => refineImageFiles([...images]), {
+      message: "At least one image is required",
+    }),
   price: z
     .number()
     .gt(0, "A Product price is required")
@@ -46,14 +29,4 @@ export const ProductSchema = z.object({
   isPublished: z.boolean(),
 });
 
-export type ErrorProperties =
-  | {
-      [key: string]: {
-        errors: string[];
-      };
-    }
-  | undefined;
-
 export type Product = z.infer<typeof ProductSchema>;
-export type Image = z.infer<typeof ImageSchema>;
-export type Category = z.infer<typeof CategorySchema>;
