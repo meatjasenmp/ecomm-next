@@ -4,7 +4,7 @@ import { createProductRequest } from "@/app/api/products/requests";
 import { uploadImagesRequest } from "@/app/api/images/requests";
 import { ProductSchema, Product } from "@/app/api/products/types";
 import { Image } from "@/app/api/images/types";
-import { ErrorProperties } from "@/app/actions/types";
+import { ErrorProperties } from "@/app/actions/product-form/types";
 import { ZodError, ZodSafeParseResult } from "zod/v4";
 import z from "zod/v4";
 

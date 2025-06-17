@@ -4,7 +4,7 @@ import Form from "next/form";
 import { useActionState } from "react";
 import { Fieldset } from "@base-ui-components/react/fieldset";
 import { getProductRequest } from "@/app/api/products/requests";
-import { addProduct } from "@/app/actions/products/actions";
+import { addProduct } from "@/app/actions/product-form/actions";
 import ProductFormFooter from "@/app/components/ProductForm/ProductFormFooter";
 import { CategoriesProps } from "@/app/admin/products/create/page";
 import styles from "@/app/styles/components/form.module.css";
