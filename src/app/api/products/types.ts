@@ -6,11 +6,9 @@ import { refineImageFiles } from "../images/utilities";
 
 export const ProductSchema = z.object({
   _id: z.string().optional(),
-  title: z.string().min(5, "A Product title is required"),
-  description: z.string().min(10, "A Product description is required"),
-  shortDescription: z
-    .string()
-    .min(5, "A Product short description is required"),
+  title: z.string().min(5, "A title is required"),
+  description: z.string().min(10, "A description is required"),
+  shortDescription: z.string().min(5, "A short description is required"),
   categories: z
     .custom<Category>()
     .array()
