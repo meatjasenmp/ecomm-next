@@ -45,9 +45,7 @@ export async function addProduct(
   }
 
   const product = data as Product;
-  const productImages = form.get("images") as File;
-  product.images = await getProductImages(productImages);
-
+  product.images = await getProductImages(form.get("images") as File);
   await createProduct(product);
   return { message: "Product created successfully" };
 }
