@@ -25,7 +25,19 @@ export const ProductSchema = z.object({
     .custom<Category>()
     .array()
     .transform((categories) => parseCategories(categories)),
-  images: z.custom<Image>().array(),
+  images: z
+    .custom<Image | File>()
+    .array()
+    .refine(
+      (images) => {
+        if (typeof images[0] === "object" && images[0] instanceof File) {
+          return images.every(
+            (image) => image instanceof File && image.size > 0,
+          );
+        }
+      },
+      { message: "At least one image is required" },
+    ),
   price: z
     .number()
     .gt(0, "A Product price is required")

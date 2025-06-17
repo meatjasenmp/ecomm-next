@@ -8,7 +8,6 @@ import {
   ProductSchema,
   Product,
   Image,
-  Category,
   ErrorProperties,
 } from "@/app/api/products/types";
 import { ZodError, ZodSafeParseResult } from "zod/v4";
@@ -20,7 +19,7 @@ function parseFormData(form: FormData): ZodSafeParseResult<Product> {
     description: form.get("description"),
     shortDescription: form.get("short-description"),
     categories: form.getAll("categories"),
-    images: form.get("images") ? [form.get("images")] : [],
+    images: [form.get("images")],
     price: Number(form.get("price")),
     discount: Number(form.get("discount")),
     isPublished: true,
@@ -28,6 +27,7 @@ function parseFormData(form: FormData): ZodSafeParseResult<Product> {
 }
 
 async function getProductImages(images: File): Promise<Image[] | undefined> {
+  console.info("Uploading images:", images);
   try {
     return [await uploadImagesRequest(images)];
   } catch (error) {
