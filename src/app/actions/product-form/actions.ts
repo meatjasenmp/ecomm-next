@@ -1,9 +1,8 @@
 "use server";
 
 import { createProductRequest } from "@/app/api/products/requests";
-import { uploadImagesRequest } from "@/app/api/images/requests";
+import { getProductImages } from "@/app/api/images/utilities";
 import { ProductSchema, Product } from "@/app/api/products/types";
-import { Image } from "@/app/api/images/types";
 import { ErrorProperties } from "@/app/actions/product-form/types";
 import { ZodError, ZodSafeParseResult } from "zod/v4";
 import z from "zod/v4";
@@ -19,15 +18,6 @@ function parseFormData(form: FormData): ZodSafeParseResult<Product> {
     discount: Number(form.get("discount")),
     isPublished: true,
   });
-}
-
-async function getProductImages(images: File): Promise<Image[]> {
-  try {
-    return [await uploadImagesRequest(images)];
-  } catch (error) {
-    console.error("Error uploading images:", error);
-    return [];
-  }
 }
 
 async function createProduct(
