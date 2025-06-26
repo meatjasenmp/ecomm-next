@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 type GridProps = {
   children: React.ReactNode;
-  className?: [key: string];
+  className?: string;
 };
 
 export default function Grid({ children, className }: GridProps) {
