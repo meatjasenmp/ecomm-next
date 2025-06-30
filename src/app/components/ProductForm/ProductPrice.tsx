@@ -3,6 +3,7 @@ import { HasError } from "./ProductForm";
 import styles from "@/app/styles/components/form.module.css";
 import classNames from "classnames";
 
+// TODO: Display image preview if images are uploaded
 export default function ProductPrice({ hasError }: HasError) {
   return (
     <Field.Root className={styles.fieldroot}>
