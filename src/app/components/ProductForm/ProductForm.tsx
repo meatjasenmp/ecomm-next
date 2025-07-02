@@ -10,7 +10,7 @@ import styles from "@/app/styles/components/form.module.css";
 import ProductCategories from "./ProductCategories";
 import ProductDescription from "./ProductDescription";
 import ProductDiscount from "./ProductDiscount";
-import ProductImages from "./ProductImages";
+import ProductImages from "./images/ProductImages";
 import ProductPrice from "./ProductPrice";
 import ProductShortDescription from "./ProductShortDescription";
 import ProductTitle from "./ProductTitle";
